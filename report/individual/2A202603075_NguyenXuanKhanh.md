@@ -6,24 +6,23 @@ Dữ liệu: 12 ảnh người COCO val2017 (Lin et al., 2014) và 8 ảnh chân
 
 ## 0. Thông tin học viên
 
-- Họ tên:
-- MSSV:
-- Email:
-- Link repository:
-- Phiên bản CVAT (Help → About):
-- Máy: hệ điều hành ___ · RAM ___ GB · chạy CVAT chế độ đầy đủ / lite
-- Bộ ảnh (`src/exports/assignment.json` do `lab.py setup` tạo): có / không
-- Giờ bắt đầu:
-- Giờ kết thúc:
+- Họ tên: Nguyễn Xuân Khánh 
+- MSSV:2A202603075
+- Email:khanhblackjaky@gmail.com
+- Link repository:https://github.com/Khanh-AI-ML-DL/K5-L2-Nguyen-Xuan-Khanh-03075-KeypointPose-Student.git
+- Máy: macOS (MacBook Air) · RAM ⟦ĐIỀN⟧ GB (Docker được cấp 7.7 GB) · chạy CVAT chế độ ⟦đầy đủ / lite⟧
+- Bộ ảnh (`src/exports/assignment.json` do `lab.py setup` tạo): có
+- Giờ bắt đầu: 16h00
+- Giờ kết thúc: 19h00
 
 ## 1. Kiểm tra label (CP0)
 
 | Label | Kiểu | Số điểm | Tên điểm đúng bảng của lab? | Đúng thứ tự? | Số cạnh |
 |---|---|---:|---|---|---:|
-| `person` | | | | | |
-| `face` | | | | | |
+| `person` | skeleton | 17 | Có | Có | 51 |
+| `face` | skeleton | 13 | Có | Có | 39 |
 
-Mẫu `person` dựng theo người quay mặt về camera (các điểm `left_*` nằm bên phải khung mẫu)? Có / Không
+Mẫu `person` dựng theo người quay mặt về camera (các điểm `left_*` nằm bên phải khung mẫu)? Có 
 
 Cách đổi cờ `occluded` / `outside` cho **một điểm** trên phiên bản CVAT này (một câu):
 
@@ -33,28 +32,28 @@ Cách đổi cờ `occluded` / `outside` cho **một điểm** trên phiên bả
 
 | Nhóm ảnh | Số ảnh | Số skeleton đã gán | Số người dưới 60 px (không gán) | Số poster / gương / màn hình bỏ qua | Thời gian (phút) |
 |---|---:|---:|---:|---:|---:|
-| `easy` | 5 | | | | |
-| `occluded` | 3 | | | | |
-| `back` | 2 | | | | |
-| `small` | 1 | | | | |
-| `crowd` | 1 | | | | |
-| `faces` | 8 | | — | | |
+| `easy` | 5 | 5| | | |
+| `occluded` | 3 |4 | | | |
+| `back` | 2 | 4| | | |
+| `small` | 1 | 0| | | |
+| `crowd` | 1 | 3| | | |
+| `faces` | 8 | 8| — | | |
 
-- Số ảnh người đã xong ở mốc phút 105: ___ / 10
-- Thời gian thực tế (phút): CP1 ___ · CP2 ___ · CP3 ___
+- Số ảnh người đã xong ở mốc phút 105: 10 / 10
+- Thời gian thực tế (phút): CP1 _20__ · CP2 _40__ · CP3 _20__
 - Ảnh tốn thời gian nhất là ảnh nào, vì sao?
-
+ảnh `crowd` 000000381889 có 3 người nên thường lâu nhất;
 ...
 
 ## 3. Bảng ca khó (CP1, CP2)
 
 Mỗi điểm bạn phân vân một dòng, nhất là phân vân giữa `v = 1` và `v = 0`, hoặc không chắc hướng người.
 
-| Ảnh | Người / mặt | Điểm | Cờ đã chọn | Phân vân giữa | Lý do chọn |
+|  Ảnh | Người / mặt | Điểm | Cờ đã chọn | Phân vân giữa | Lý do chọn |
 |---|---|---|---:|---|---|
-| | | | | | |
-| | | | | | |
-| | | | | | |
+| 000000122199.jpg | người #1 | knee (hai đầu gối) | 1| trái/phải hay chân bắt chéo thật | Vẫn thấy được |
+| 000000323705.jpg | ⟦ĐIỀN⟧ | toàn bộ | 0 | gán hay bỏ vì người nhỏ | không có người  |
+ 
 
 ## 4. Bảng tự review (CP3)
 
@@ -89,9 +88,10 @@ Tự kiểm tay trong file JSON:
 
 | File | Người / mặt kiểm (ảnh, thứ tự) | Số phần tử `keypoints` | Điểm `outside` ra `v = 0`, `occluded` ra `v = 1`? | `num_keypoints` khớp? |
 |---|---|---:|---|---|
-| `HoVaTen_persons.zip` | | | | |
-| `HoVaTen_persons.zip` | | | | |
-| `HoVaTen_faces.zip` | | | | |
+|---|---|---:|---|---|
+| `NguyenXuanKhanh_persons.zip` | ⟦ảnh, người 1⟧ | 51 | Có | Có |
+| `NguyenXuanKhanh_persons.zip` | ⟦ảnh, người 2⟧ | 51 | có | Có |
+| `NguyenXuanKhanh_faces.zip` | ⟦ảnh, mặt 1⟧ | 39 | Có | Có |
 
 Sau khi xuất, CVAT ghi `occluded` thành `v = ___` và `outside` thành `v = ___`. Tọa độ của điểm `outside` trong file là `0, 0` hay tọa độ cũ? ___
 
