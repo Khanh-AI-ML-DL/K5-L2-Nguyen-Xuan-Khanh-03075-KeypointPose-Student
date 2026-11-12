@@ -63,7 +63,7 @@ Mã lỗi dùng đúng một trong: `lr_swap`, `vis_flag`, `position`, `missing`
 
 | Ảnh | Người / mặt | Điểm | Mã lỗi | Ghi chú | Đã sửa? |
 ---|---|---|---|---|---|
-| 000000122199.jpg | #1 | knee | ⟦lr_swap hoặc ok⟧ | script cảnh báo knee ngược phía; ⟦kết luận sau khi kiểm lại⟧ | Labcoach chấp nhận lỗi do ảnh |
+| 000000122199.jpg | #1 | knee | lr_swap  | script cảnh báo knee ngược phía| Labcoach chấp nhận lỗi do ảnh |
 | 000000323705.jpg | all | cả người | missing | script báo không có skeleton `person` | Ảnh ko có người |
 Tổng hợp số lỗi theo mã:
 
