@@ -52,7 +52,7 @@ Mỗi điểm bạn phân vân một dòng, nhất là phân vân giữa `v = 1`
 |  Ảnh | Người / mặt | Điểm | Cờ đã chọn | Phân vân giữa | Lý do chọn |
 |---|---|---|---:|---|---|
 | 000000122199.jpg | người #1 | knee (hai đầu gối) | 1| trái/phải hay chân bắt chéo thật | Vẫn thấy được |
-| 000000323705.jpg | ⟦ĐIỀN⟧ | toàn bộ | 0 | gán hay bỏ vì người nhỏ | không có người  |
+| 000000323705.jpg |  | toàn bộ | 0 | gán hay bỏ vì người nhỏ | không có người  |
  
 
 ## 4. Bảng tự review (CP3)
@@ -62,16 +62,9 @@ Mỗi điểm bạn phân vân một dòng, nhất là phân vân giữa `v = 1`
 Mã lỗi dùng đúng một trong: `lr_swap`, `vis_flag`, `position`, `missing`, `extra`, `ok`.
 
 | Ảnh | Người / mặt | Điểm | Mã lỗi | Ghi chú | Đã sửa? |
-|---|---|---|---|---|---|
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
-
+---|---|---|---|---|---|
+| 000000122199.jpg | #1 | knee | ⟦lr_swap hoặc ok⟧ | script cảnh báo knee ngược phía; ⟦kết luận sau khi kiểm lại⟧ | Labcoach chấp nhận lỗi do ảnh |
+| 000000323705.jpg | all | cả người | missing | script báo không có skeleton `person` | Ảnh ko có người |
 Tổng hợp số lỗi theo mã:
 
 | `lr_swap` | `vis_flag` | `position` | `missing` | `extra` | `ok` |
@@ -93,19 +86,32 @@ Tự kiểm tay trong file JSON:
 | `NguyenXuanKhanh_persons.zip` | ⟦ảnh, người 2⟧ | 51 | có | Có |
 | `NguyenXuanKhanh_faces.zip` | ⟦ảnh, mặt 1⟧ | 39 | Có | Có |
 
-Sau khi xuất, CVAT ghi `occluded` thành `v = ___` và `outside` thành `v = ___`. Tọa độ của điểm `outside` trong file là `0, 0` hay tọa độ cũ? ___
+Sau khi xuất, CVAT ghi `occluded` thành `v = 1` và `outside` thành `v = 0`. Tọa độ của điểm `outside` trong file là `0, 0` hay tọa độ cũ? ___
 
 Hai job đã chuyển sang completed trên CVAT? Có / Không
-
+Có
 Dán phần **TÓM TẮT** in ra từ `src/check_submission.py`:
 
 ```text
-(dán ở đây)
+- File person: NguyenXuanKhanh_persons.zip
+  Số ảnh: 12 · số skeleton `person`: 16 · mỗi annotation 51 số
+  Skeleton theo ảnh: 000000054909=2, 000000057978=1, 000000122199=2, 000000210604=2, 000000294329=1, 000000323705=0, 000000365099=1, 000000381889=3, 000000445187=1, 000000461389=1, 000000463932=1, 000000516902=1
+  Cờ v: v=2 203 (75%) · v=1 29 (11%) · v=0 40 (15%)
+  num_keypoints trung bình: 14.5
+- File face: NguyenXuanKhanh_faces.zip
+  Số ảnh: 8 · số skeleton `face`: 8 · mỗi annotation 39 số
+  Skeleton theo ảnh: face_122747=1, face_185015=1, face_186226=1, face_223746=1, face_232598=1, face_255797=1, face_257657=1, face_38721=1
+  Cờ v: v=2 97 (93%) · v=1 7 (7%) · v=0 0 (0%)
+  num_keypoints trung bình: 13.0
+- Ghi chú: 40 điểm v = 0 vẫn mang tọa độ cũ (CVAT 2.x xuất như vậy; chuẩn COCO ghi 0, 0). Không phải lỗi: điểm v = 0 bị bỏ qua khi huấn luyện và khi chấm.
+- Số [LỖI]: 0 · số [CẢNH BÁO]: 2
+Kết quả: ĐẠT (đọc lại từng cảnh báo ở trên)
+
 ```
 
 Các `[CẢNH BÁO]` còn giữ nguyên và lý do:
 
-...
+- Được labCoach check qua rồi
 
 ## 6. Ảnh chụp màn hình
 
@@ -155,17 +161,29 @@ Nguồn ảnh: COCO val2017 / Wikimedia Commons.
 | | | | |
 | | | | |
 
-Kết quả `src/check_submission.py` cho `HoVaTen_bonus_persons.zip`:
+Kết quả `src/check_submission.py` cho `NguyenXuanKhanh_bonus_persons.zip`:
 
 ```text
-(dán ở đây)
+
+=== src/exports/NguyenXuanKhanh_bonus_persons.zip (label `person`) ===
+
+----- TÓM TẮT (dán vào báo cáo mục 5) -----
+- File person: NguyenXuanKhanh_bonus_persons.zip
+  Số ảnh: 3 · số skeleton `person`: 8 · mỗi annotation 51 số
+  Skeleton theo ảnh: 000000323525=3, 000000337458=2, 000000465508=3
+  Cờ v: v=2 80 (59%) · v=1 3 (2%) · v=0 53 (39%)
+  num_keypoints trung bình: 10.4
+- Ghi chú: 53 điểm v = 0 vẫn mang tọa độ cũ (CVAT 2.x xuất như vậy; chuẩn COCO ghi 0, 0). Không phải lỗi: điểm v = 0 bị bỏ qua khi huấn luyện và khi chấm.
+- Số [LỖI]: 0 · số [CẢNH BÁO]: 0
+Kết quả: ĐẠT
+nguyenxuankhanh@192 K5-L2-Nguyen-Xuan-Khanh-03075-KeypointPose-Student % 
 ```
 
 ### B2 — 5 ảnh khuôn mặt đen trắng / hồng ngoại
 
 Ảnh không màu khó hơn ở điểm nào? Kính râm trên ảnh hồng ngoại có còn là `v = 1` không?
 
-...
+Kính râm hồng ngoại có gọi là `v=1`
 
 ### B3 — Model so với nhãn của tôi (không tính điểm)
 
@@ -185,5 +203,5 @@ Kết quả `src/check_submission.py` cho `HoVaTen_bonus_persons.zip`:
    ...
 
 ## 9. Tài liệu tham khảo và công cụ AI đã dùng
-
-...
+- CVAT 2.74.1 (annotation tool).
+- Claude (Anthropic): hỗ trợ xử lý lỗi Git/GitHub, chạy `lab.py`, và soạn khung báo cáo. 
